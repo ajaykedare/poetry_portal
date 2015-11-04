@@ -1,0 +1,36 @@
+<div class="container">
+		<div style="padding-bottom: 50px">
+			<div class="well" ng-repeat="poem in mainService.poemArray">
+				<table style="width: 100%">
+					<tr>
+						<td style="width:20%;vertical-align: top">
+						</td>
+						<td style="width:60%;vertical-align: top">
+	                        <p id="poemdata">{{poem.data}}</p>	                        
+	                    </td>
+	                    <td style="width:20%;vertical-align: top">
+	                    </td>
+					</tr>
+					<tr>
+						<td style="width:20%;vertical-align: top">
+							<span ng-click="addlike(poem);"><i class="fa fa-thumbs-up"></i></span> {{poem.likes}}
+						</td>
+						<td style="width:60%;vertical-align: top">
+						</td>
+						<td style="width:20%;vertical-align: top">
+							<span style="margin-right:10%;"><i class="fa fa-user"></i></span> {{poem.username}}
+						</td>
+					</tr>
+					<tr>
+						<td style="width:20%;vertical-align: top">							
+						</td>
+						<td style="width:60%;vertical-align: top">
+						</td>
+						<td style="width:20%;vertical-align: top">
+							{{poem.date}}
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>

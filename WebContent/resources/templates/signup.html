@@ -1,0 +1,53 @@
+<div class="container">
+	<div style="padding-bottom: 50px">
+		<table style="width: 100%">
+			<tr ng-show="message!=''">
+				<td  colspan="2" style="width: 100%; padding: 10px;">
+					<div class="alert alert-info" role="alert">{{message}}</div>
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 45%; padding-left: 40px; vertical-align: top">
+					<div id="signup">
+						<h1>
+							<strong>Welcome.</strong> Please Sign Up.
+						</h1>
+						<form action="javascript:void(0);" method="get">
+							<fieldset>
+								<p>
+									<input type="text" placeholder="Username" class="login"
+										ng-model="signup_username">
+								</p>
+								<p>
+									<input type="password" class="login" placeholder="Password"
+										ng-model="signup_password">
+								</p>
+								<p>
+									<input type="password" class="login"
+										placeholder="Confirm Password" ng-model="confirmpassword">
+								</p>
+								<p>
+									<input type="text" class="login" placeholder="Mobile No"
+										ng-model="mobile">
+								</p>
+								<input type="email" class="login" placeholder="Your Email"
+									ng-model="email" />
+								</p>
+
+								<p>
+									<input type="submit" value="SignUp" class="submitbtn"
+										ng-click="signup();">
+								</p>
+								<p>
+									<a href="#/">Back</a>
+								</p>
+								
+							</fieldset>
+						</form>
+
+					</div> <!-- end signup -->
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>

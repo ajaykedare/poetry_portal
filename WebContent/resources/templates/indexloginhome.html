@@ -1,0 +1,40 @@
+<div class="container">
+	<div style="padding-bottom: 50px">
+		<table style="width: 100%">
+			<tr ng-show="message!=''" >
+				<td colspan="2" style="width: 100%; padding: 10px;">
+					<div  class="alert alert-info" role="alert">{{message}}</div>
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 45%; padding-left: 40px; vertical-align: top">
+					<div id="login">
+						<h1>
+							<strong>Welcome.</strong> Please login.
+						</h1>
+						<form action="javascript:void(0);" method="get">
+							<fieldset>
+								<p>
+									<input type="text" placeholder="Username" class="login"
+										ng-model="username" ng-required="true"/>
+								</p>
+								<p>
+									<input type="password" class="login" placeholder="Password"
+										ng-model="password"/>
+								</p>
+								<p>
+									<!-- <a href="#">Forgot Password?</a> --> <a style="float: right;margin-right: 20px;" href="#/signup">Sign Up</a>
+								</p>
+								<p>
+									<input type="submit" value="Login" class="submitbtn"
+										ng-click="login();">
+								</p>
+							</fieldset>
+						</form>
+
+					</div> <!-- end login -->
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
