@@ -62,3 +62,11 @@ width: 300px;
     font-size: xx-large;
     color: crimson;
 }
+
+.pointer{
+	cursor: pointer;
+}
+
+#uploadBtnDiv{
+	text-align: center;
+}

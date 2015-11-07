@@ -15,6 +15,10 @@ poemApp.config(['$routeProvider', function($routeProvider){
 		templateUrl:'resources/templates/home.html',
 		controller:'MainCtrl'
 	})
+	.when('/upload',{
+		templateUrl:'resources/templates/upload.html',
+		controller:'MainCtrl'
+	})
 	.otherwise({
 		redirectTo : '/'
 	});

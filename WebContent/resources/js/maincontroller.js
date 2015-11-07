@@ -17,22 +17,17 @@ poemApp.controller("MainCtrl", function($scope, $http, $location, $q, MainServic
 	$scope.email="";
 	$scope.mobile="";
 	$scope.message="";
+	$scope.poemTextarea="";
 	
 
 	if(!$scope.mainService.isInitialised)
 	{
-		//MainService.init();	
 		MainService.isInitialised=true;
-
-		MainService.loadpoems()
-        .then(
-            function (result) {
-                // promise was fullfilled (regardless of outcome)
-                // checks for information will be peformed here
+		MainService.loadpoems().then(
+            function (result) {                
                 $scope.mainService.poemArray = result;
             },
             function (error) {
-                // handle errors here
                 console.log(error.statusText);
             }
         );		       
@@ -100,9 +95,7 @@ poemApp.controller("MainCtrl", function($scope, $http, $location, $q, MainServic
 	};
 	
 	$scope.upload = function(){
-		$location.path('/');
-		$scope.mainService.currentUser=null;
-		$scope.mainService.isUserLoggedIn=false;
+		console.log("Poem uploading : "+$scope.poemTextarea);
 	};
 
 	$scope.addlike = function(poem){
