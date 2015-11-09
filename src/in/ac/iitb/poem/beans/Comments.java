@@ -1,15 +1,13 @@
 package in.ac.iitb.poem.beans;
 
-import java.util.List;
-
-public class Poem {
-
+public class Comments {
 	private String username;
-	private String data;
+	private String text;
 	private int likes;
 	private String date_ts;
 	private String display_date;
-	private List<Comments> comments;
+	
+	
 	/**
 	 * @return the username
 	 */
@@ -23,16 +21,16 @@ public class Poem {
 		this.username = username;
 	}
 	/**
-	 * @return the data
+	 * @return the text
 	 */
-	public String getData() {
-		return data;
+	public String getText() {
+		return text;
 	}
 	/**
-	 * @param data the data to set
+	 * @param text the text to set
 	 */
-	public void setData(String data) {
-		this.data = data;
+	public void setText(String text) {
+		this.text = text;
 	}
 	/**
 	 * @return the likes
@@ -70,17 +68,6 @@ public class Poem {
 	public void setDisplay_date(String display_date) {
 		this.display_date = display_date;
 	}
-	/**
-	 * @return the comments
-	 */
-	public List<Comments> getComments() {
-		return comments;
-	}
-	/**
-	 * @param comments the comments to set
-	 */
-	public void setComments(List<Comments> comments) {
-		this.comments = comments;
-	}	
-		
+	
+	
 }

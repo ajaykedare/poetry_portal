@@ -70,3 +70,10 @@ width: 300px;
 #uploadBtnDiv{
 	text-align: center;
 }
+.commentDiv{
+	width:80%;
+}
+.newlineData
+{
+	white-space: pre-wrap;
+}

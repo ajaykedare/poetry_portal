@@ -2,6 +2,8 @@ package in.ac.iitb.poem.controllers;
 
 import in.ac.iitb.poem.beans.Poem;
 import in.ac.iitb.poem.beans.User;
+import in.ac.iitb.poem.beans.Comments;
+
 import in.ac.iitb.poem.services.MainService;
 
 import java.io.File;
@@ -36,6 +38,10 @@ public class MainController {
 	@Autowired
 	MainService mainService;
 
+	/**
+	 * @param propFileName
+	 * @return Properties file object
+	 */
 	public Properties getPropertiesFile(String propFileName)
 	{
 		Properties prop = new Properties();
@@ -68,7 +74,6 @@ public class MainController {
 	 */
 	@RequestMapping(value="login", method=RequestMethod.POST,headers="Accept=application/json")
 	public @ResponseBody String login( @RequestBody User user ) {
-		System.out.println("Username :" + user.getUsername() + ", Password: " + user.getPassword());
 		ObjectMapper mapper = new ObjectMapper();
 		String returnString="{\"result\": \"Fail\"}";
 		boolean flag=false;
@@ -82,9 +87,7 @@ public class MainController {
 					flag=true;
 					user.setEmail(obj.getEmail());
 					user.setMobile(obj.getMobile());
-					returnString=mapper.writeValueAsString(user);
-					System.out.println(obj.getUsername());
-					System.out.println(obj.getPassword());
+					returnString=mapper.writeValueAsString(user);					
 				}
 			}						
 		}
@@ -176,6 +179,36 @@ public class MainController {
 			e.printStackTrace();
 		}
 			return "{\"result\": \"Success\"}";
+	}
+	
+	@RequestMapping(value="save", method=RequestMethod.POST,headers="Accept=application/json")
+	public @ResponseBody String savepoems( HttpServletRequest req, HttpServletResponse res ) {
+		String jsonString = null;
+		
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		//mapper.writeValue(new File("D:\\staff.json"), staff);
+		JSONParser parser = new JSONParser();
+		Properties prop=getPropertiesFile("config.properties");
+		try {
+			//FileReader fileReader = new FileReader(prop.getProperty("poemfilepath"));
+			jsonString = req.getReader().readLine();
+			JSONArray json = (JSONArray) parser.parse(jsonString);
+			//json.add(poem);
+			mapper.writeValue(new File(prop.getProperty("poemfilepath")), json);
+		}
+		catch (JsonGenerationException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return "{\"result\": \"Success\"}";
 	}
 
 	@RequestMapping(value="ajayurl", method=RequestMethod.POST,headers="Accept=application/json")

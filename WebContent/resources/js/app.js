@@ -24,3 +24,13 @@ poemApp.config(['$routeProvider', function($routeProvider){
 	});
 
 } ]);
+
+
+poemApp.directive('poemDirective', function(){
+    return function(scope, element, attr){
+     //   element.bind('click', function(){ 
+        	element.html().replace(/\n|\r\n|\r/g, "<br>");                  
+       // });
+    };
+});
+

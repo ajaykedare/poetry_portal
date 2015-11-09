@@ -6,37 +6,80 @@
 			</a>
 		</div>
 		<div style="padding-bottom: 50px">
-			<div class="well" ng-repeat="poem in mainService.poemArray">
-				<table style="width: 100%">
-					<tr>
-						<td style="width:20%;vertical-align: top">
-						</td>
-						<td style="width:60%;vertical-align: top">
-	                        <p id="poemdata">{{poem.data}}</p>	                        
-	                    </td>
-	                    <td style="width:20%;vertical-align: top">
-	                    </td>
-					</tr>
-					<tr>
-						<td style="width:20%;vertical-align: top">
-							<span><i class="fa fa-thumbs-up pointer" ng-click="addlike(poem);"></i></span> {{poem.likes}}
-						</td>
-						<td style="width:60%;vertical-align: top">
-						</td>
-						<td style="width:20%;vertical-align: top">
-							<span style="margin-right:10%;"><i class="fa fa-user"></i></span> {{poem.username}}
-						</td>
-					</tr>
-					<tr>
-						<td style="width:20%;vertical-align: top">							
-						</td>
-						<td style="width:60%;vertical-align: top">
-						</td>
-						<td style="width:20%;vertical-align: top">
-							{{poem.date}}
-						</td>
-					</tr>
-				</table>
+			<div id="poemDiv"  ng-repeat="poem in mainService.poemArray">
+				<div class="well" id="{{poem.date_ts}}">
+					<table style="width: 100%">
+						<tr>
+							<td style="width:20%;vertical-align: top">
+							</td>
+							<td style="width:60%;vertical-align: top">
+		                        <p class="newlineData">{{poem.data}}</p>	                        
+		                    </td>
+		                    <td style="width:20%;vertical-align: top">
+		                    </td>
+						</tr>
+						<tr>
+							<td style="width:20%;vertical-align: top">
+								<span><i class="fa fa-thumbs-up pointer" ng-click="addlike(poem);"></i></span> {{poem.likes}}
+							</td>
+							<td style="width:60%;vertical-align: top">
+							</td>
+							<td style="width:20%;vertical-align: top">
+								<span><i class="fa fa-user"></i></span> {{poem.username}}
+							</td>
+						</tr>
+						<tr>
+							<td style="width:20%;vertical-align: top">							
+							</td>
+							<td style="width:60%;vertical-align: top">
+							</td>
+							<td style="width:20%;vertical-align: top">
+								{{poem.display_date}}
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="well commentDiv" ng-repeat="comment in comments = poem.comments | orderBy: 'date_ts'">
+					<table style="width: 100%">
+						<tr>
+							<td style="width:20%;vertical-align: top">
+							</td>
+							<td style="width:40%;vertical-align: top">
+		                        <p class="newlineData">{{comment.text}}</p>	                        
+		                    </td>
+		                    <td style="width:40%;vertical-align: top">
+		                    </td>
+						</tr>
+						<tr>
+							<td style="width:20%;vertical-align: top">
+								<span><i class="fa fa-thumbs-up pointer" ng-click="addCommentLike(comment);"></i></span> {{comment.likes}}
+							</td>
+							<td style="width:40%;vertical-align: top">
+							</td>
+							<td style="width:40%;vertical-align: top">
+								<span><i class="fa fa-user"></i></span> {{comment.username}}
+							</td>
+						</tr>
+						<tr>
+							<td style="width:20%;vertical-align: top">							
+							</td>
+							<td style="width:40%;vertical-align: top">
+							</td>
+							<td style="width:40%;vertical-align: top">
+								{{comment.display_date}}
+							</td>
+						</tr>
+					</table>					
+				</div>
+				<div>
+					<p>
+						<textarea ng-model="commentTextarea" rows="2" cols="50" class="input-no-width rounded shaded left clearboth" id="taid{{poem.date_ts}}" required></textarea> <button type="button" class="btn btn-primary btn-sm" ng-click="addComment(poem);"> Comment </button>
+					</p>
+								
+					<p>
+						
+					</p>
+				</div>
 			</div>
 		</div>
 	</div>

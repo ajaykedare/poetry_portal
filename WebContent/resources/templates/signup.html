@@ -12,26 +12,41 @@
 						<h1>
 							<strong>Welcome.</strong> Please Sign Up.
 						</h1>
-						<form action="javascript:void(0);" method="get">
+						
 							<fieldset>
 								<p>
-									<input type="text" placeholder="Username" class="login"
-										ng-model="signup_username">
+									<input type="text"   placeholder="Username" class="login" ng-model="signup_username" required>
+									<div role="alert">
+     									 <span class="error" style="color:red" ng-show="suerror!='' &&(signup_username=='' || !signup_username )">
+      									 {{suerror}}</span>
+  									 </div>
 								</p>
 								<p>
-									<input type="password" class="login" placeholder="Password"
-										ng-model="signup_password">
+									<input type="password" class="login" placeholder="Password" ng-model="signup_password" required>
+									<div role="alert">
+     									 <span class="error" style="color:red" ng-show="sperror!='' &&(signup_password=='' || !signup_password) ">
+      									  {{sperror}}</span>
+  									 </div>
 								</p>
 								<p>
-									<input type="password" class="login"
-										placeholder="Confirm Password" ng-model="confirmpassword">
+									<input type="password"  class="login" placeholder="Confirm Password" ng-model="confirmpassword" required>
+									<div role="alert">
+     									 <span class="error" style="color:red" ng-show="scperror!='' &&(confirmpassword=='' || !confirmpassword)||(confirmpassword!=signup_password) ">
+      									  {{scperror}}</span>
+  									 </div>
 								</p>
 								<p>
-									<input type="text" class="login" placeholder="Mobile No"
-										ng-model="mobile">
+									<input type="number"  class="login" name="mb" placeholder="Mobile No" ng-model="mobile"  required>
+									<div role="alert">
+										<span class="error" style="color:red" ng-show="merror!='' &&(mobile.length!=10) || !is-int(mobile)">
+      									  {{merror}}</span>     									
+  									 </div>
 								</p>
-								<input type="email" class="login" placeholder="Your Email"
-									ng-model="email" />
+									<input type="email"  class="login" placeholder="Your Email" ng-model="email" required/>
+									<div role="alert">
+     									 <span class="error" style="color:red" ng-show="emerror!='' &&(email=='' || !email)">
+      									  {{emerror}}</span>
+  									 </div>
 								</p>
 
 								<p>
@@ -43,7 +58,7 @@
 								</p>
 								
 							</fieldset>
-						</form>
+						
 
 					</div> <!-- end signup -->
 				</td>
