@@ -21,6 +21,16 @@
     <script type="text/javascript" src="resources/js/app.js"></script>
     <script type="text/javascript" src="resources/js/mainservice.js"></script>
     <script type="text/javascript" src="resources/js/maincontroller.js"></script>
+    <script type="text/ng-template" id="commentlikelistTemplate.html">
+      <div ng-repeat="like in likes = comment.likes">
+        {{like}}
+      </div>
+    </script>
+    <script type="text/ng-template" id="poemlikelistTemplate.html">
+      <div ng-repeat="like in likes = poem.likes">
+        {{like}}
+      </div>
+    </script>
 <meta charset="UTF-8">
 <title>Poem Portal</title>
 </head>

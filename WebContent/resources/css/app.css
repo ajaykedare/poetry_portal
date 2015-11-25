@@ -71,9 +71,21 @@ width: 300px;
 	text-align: center;
 }
 .commentDiv{
-	width:80%;
+	width:60%;
 }
 .newlineData
 {
 	white-space: pre-wrap;
+}
+.liked
+{
+	color:blue;
+}
+.notliked
+{
+	color:black;
+}
+.comment_last_tr_tag{
+	border-bottom-style: solid;
+	border-bottom-width: thin;
 }
