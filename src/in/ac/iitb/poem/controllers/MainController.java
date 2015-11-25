@@ -2,8 +2,6 @@ package in.ac.iitb.poem.controllers;
 
 import in.ac.iitb.poem.beans.Poem;
 import in.ac.iitb.poem.beans.User;
-import in.ac.iitb.poem.beans.Comments;
-
 import in.ac.iitb.poem.services.MainService;
 
 import java.io.File;
@@ -22,6 +20,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,69 +35,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MainController {
 
 	@Autowired
-	MainService mainService;
-
-	/**
-	 * @param propFileName
-	 * @return Properties file object
-	 */
-	public Properties getPropertiesFile(String propFileName)
-	{
-		Properties prop = new Properties();
-		InputStream inputStream;
-		inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
-		try 
-		{
-			if (inputStream != null) 
-			{
-				prop.load(inputStream);
-			} 
-			else 
-			{
-				throw new FileNotFoundException("Property file '" + propFileName + "' not found in the classpath");
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return prop;
-
-	}
+	MainService mainService;	
 
 	/**
 	 * @param user
 	 * @return user objet in json
 	 * 
-	 * Desc: Checks if user is present in stored users.json file from location iserfilepath
+	 * Desc: Checks if user is present in stored users.json file from location userfilepath
 	 */
 	@RequestMapping(value="login", method=RequestMethod.POST,headers="Accept=application/json")
 	public @ResponseBody String login( @RequestBody User user ) {
-		ObjectMapper mapper = new ObjectMapper();
-		String returnString="{\"result\": \"Fail\"}";
-		boolean flag=false;
-		try {
-			Properties prop=getPropertiesFile("config.properties");
-			List<User> list   = mapper.readValue(new File(prop.getProperty("userfilepath")),new TypeReference<List<User>>(){});
-			//System.out.println("Username :" + user.getUsername() + ", Password: " + user.getPassword());
-			for (User obj : list)
-			{
-				if((user.getUsername().equalsIgnoreCase(obj.getUsername())) && user.getPassword().equals(obj.getPassword())){
-					flag=true;
-					user.setEmail(obj.getEmail());
-					user.setMobile(obj.getMobile());
-					returnString=mapper.writeValueAsString(user);					
-				}
-			}						
-		}
-		catch (JsonGenerationException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return returnString;				
+		return mainService.login(user);		
 	}
 
 	/**
@@ -109,26 +56,7 @@ public class MainController {
 	 */
 	@RequestMapping(value="signup", method=RequestMethod.POST,headers="Accept=application/json")
 	public @ResponseBody String signup( @RequestBody User user ) {
-		ObjectMapper mapper = new ObjectMapper();
-		JSONParser parser = new JSONParser();
-		Properties prop=getPropertiesFile("config.properties");
-		try {
-			FileReader fileReader = new FileReader(prop.getProperty("userfilepath"));
-			JSONArray json = (JSONArray) parser.parse(fileReader);
-			json.add(user);
-			mapper.writeValue(new File(prop.getProperty("userfilepath")), json);
-		}
-		catch (JsonGenerationException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-			return "{\"result\": \"Success\"}";
+		return mainService.signup(user);	
 	}
 	
 	/**
@@ -136,87 +64,28 @@ public class MainController {
 	 */
 	@RequestMapping(value="loadpoems", method=RequestMethod.POST,headers="Accept=application/json")
 	public @ResponseBody String loadpoems() {
-		ObjectMapper mapper = new ObjectMapper();
-		JSONParser parser = new JSONParser();
-		JSONArray json = new JSONArray();
-		Properties prop=getPropertiesFile("config.properties");
-		try {
-			FileReader fileReader = new FileReader(prop.getProperty("poemfilepath"));
-			json = (JSONArray) parser.parse(fileReader);
-		}
-		catch (JsonGenerationException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-			return json.toJSONString();
+		return mainService.loadpoems();
 	}
 	
+	/**
+	 * @param poem
+	 * @return success
+	 * 
+	 * Desc: Uploads the poem to poemdata.json file
+	 */
 	@RequestMapping(value="upload", method=RequestMethod.POST,headers="Accept=application/json")
 	public @ResponseBody String upload( @RequestBody Poem poem ) {
-		ObjectMapper mapper = new ObjectMapper();
-		JSONParser parser = new JSONParser();
-		Properties prop=getPropertiesFile("config.properties");
-		try {
-			FileReader fileReader = new FileReader(prop.getProperty("poemfilepath"));
-			JSONArray json = (JSONArray) parser.parse(fileReader);
-			json.add(poem);
-			mapper.writeValue(new File(prop.getProperty("poemfilepath")), json);
-		}
-		catch (JsonGenerationException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-			return "{\"result\": \"Success\"}";
+		return mainService.upload(poem);
 	}
 	
 	@RequestMapping(value="save", method=RequestMethod.POST,headers="Accept=application/json")
 	public @ResponseBody String savepoems( HttpServletRequest req, HttpServletResponse res ) {
 		String jsonString = null;
-		
-		
-		ObjectMapper mapper = new ObjectMapper();
-		
-		//mapper.writeValue(new File("D:\\staff.json"), staff);
-		JSONParser parser = new JSONParser();
-		Properties prop=getPropertiesFile("config.properties");
 		try {
-			//FileReader fileReader = new FileReader(prop.getProperty("poemfilepath"));
-			jsonString = req.getReader().readLine();
-			JSONArray json = (JSONArray) parser.parse(jsonString);
-			//json.add(poem);
-			mapper.writeValue(new File(prop.getProperty("poemfilepath")), json);
-		}
-		catch (JsonGenerationException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+			jsonString = req.getReader().readLine();			
+		}catch (IOException e) {
 			e.printStackTrace();
 		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-		return "{\"result\": \"Success\"}";
-	}
-
-	@RequestMapping(value="ajayurl", method=RequestMethod.POST,headers="Accept=application/json")
-	public @ResponseBody String submitAdmissionForm(HttpServletRequest req, HttpServletResponse res) throws IOException{
-		String jsonString = null;
-		jsonString = req.getReader().readLine();
-		System.out.println("In controller");
-		return mainService.processRequest(jsonString);
-	}
-
+		return mainService.savepoems(jsonString);
+	}	
 }

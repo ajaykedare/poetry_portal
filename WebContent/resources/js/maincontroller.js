@@ -139,9 +139,9 @@ poemApp.controller("MainCtrl", function($scope, $http, $location, $q, MainServic
 		    	alert('Signup successful '+ $scope.username + ' !\n Login to continue.');
 		    	$location.path('/');
 		    }
-		    else
+		    else if(data.result=="UserExists")
 		    	{
-		    		$scope.message="User does not exist, please try again !";
+		    		$scope.message="Username already exists, please choose another !";
 		    	}
 		  });
 		result.error(function (data, status){
@@ -160,7 +160,7 @@ poemApp.controller("MainCtrl", function($scope, $http, $location, $q, MainServic
 		var poem={};
 		poem.username = $scope.mainService.currentUser.username;
 		poem.data = $scope.poemTextarea;
-		poem.likes = 0;
+		poem.likes = [];
 		poem.date_ts = Date.now().toString(); //Take todays date
 		poem.display_date = new Date().toString().substring(0,24);
 		poem.comments=[];	
@@ -214,11 +214,30 @@ poemApp.controller("MainCtrl", function($scope, $http, $location, $q, MainServic
 	};
 
 	$scope.addlike = function(poem){
-		poem.likes+=1;
+		var username=$scope.mainService.currentUser.username;
+		var index=poem.likes.indexOf(username);
+		if(index==-1)
+		{
+			poem.likes.push(username);			
+		}
+		else
+		{
+			poem.likes.splice(index,1);
+		}
 		$scope.savepoemobject();
 	};
 	$scope.addCommentLike = function(comment){
-		comment.likes+=1;
+		var username=$scope.mainService.currentUser.username;
+		var index=comment.likes.indexOf(username);
+		if(index==-1)
+		{
+			comment.likes.push(username);
+			$scope.savepoemobject();
+		}
+		else
+		{
+			comment.likes.splice(index,1);
+		}
 		$scope.savepoemobject();
 	};
 	$scope.addComment = function(poem){
@@ -227,7 +246,7 @@ poemApp.controller("MainCtrl", function($scope, $http, $location, $q, MainServic
 		var commentData=document.getElementById('taid'+poem.date_ts).value;
 		document.getElementById('taid'+poem.date_ts).value="";
 		comment.text=commentData;
-		comment.likes=0;
+		comment.likes=[];
 		comment.date_ts=Date.now().toString();
 		comment.display_date=new Date().toString().substring(0,24);
 		poem.comments.push(comment);

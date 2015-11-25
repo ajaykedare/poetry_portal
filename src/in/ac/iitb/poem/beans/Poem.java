@@ -6,7 +6,7 @@ public class Poem {
 
 	private String username;
 	private String data;
-	private int likes;
+	private List<String> likes;
 	private String date_ts;
 	private String display_date;
 	private List<Comments> comments;
@@ -34,16 +34,17 @@ public class Poem {
 	public void setData(String data) {
 		this.data = data;
 	}
+
 	/**
 	 * @return the likes
 	 */
-	public int getLikes() {
+	public List<String> getLikes() {
 		return likes;
 	}
 	/**
 	 * @param likes the likes to set
 	 */
-	public void setLikes(int likes) {
+	public void setLikes(List<String> likes) {
 		this.likes = likes;
 	}
 	/**
