@@ -1,0 +1,20 @@
+[
+  {
+    "password": "garg",
+    "mobile": "8888",
+    "email": "a@b.com",
+    "username": "neha"
+  },
+  {
+    "password": "ajay",
+    "mobile": "989898",
+    "email": "a@b.com",
+    "username": "ajaykedare"
+  },
+  {
+    "password": "ajay",
+    "mobile": "9878787878",
+    "email": "a@b.com",
+    "username": "ajay"
+  }
+]
