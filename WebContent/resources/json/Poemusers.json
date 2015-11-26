@@ -16,5 +16,17 @@
     "mobile": "9878787878",
     "email": "a@b.com",
     "username": "ajay"
+  },
+  {
+    "password": "12345",
+    "mobile": "3243243233",
+    "email": "vbd@gmail.com",
+    "username": "niharika"
+  },
+  {
+    "username": "rkj",
+    "password": "rkj",
+    "mobile": "9898989898",
+    "email": "rkj@cse.iitb.ac.in"
   }
 ]

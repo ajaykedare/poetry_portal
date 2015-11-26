@@ -120,7 +120,7 @@ poemApp.controller("MainCtrl", function($scope, $http, $location, $q, MainServic
 			flag=0;
 		}
 		if($scope.email=='' || !$scope.email ){
-			$scope.emerror='Please enter your email id';
+			$scope.emerror='Please enter valid email id';
 			flag=0;
 		}
 		
