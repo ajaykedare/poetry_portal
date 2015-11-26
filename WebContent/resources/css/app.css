@@ -73,13 +73,17 @@ width: 300px;
 .commentDiv{
 	width:60%;
 }
+.poemDivHrTag{
+	margin-bottom: 5%;
+    margin-top: 5%;
+}
 .newlineData
 {
 	white-space: pre-wrap;
 }
 .liked
 {
-	color:blue;
+	color:#5890FF;
 }
 .notliked
 {

@@ -79,7 +79,7 @@ poemApp.controller("MainCtrl", function($scope, $http, $location, $q, MainServic
 		    }
 		    else
 		    {		    		
-		    	$scope.message="User does not exist, please try again !";
+		    	$scope.message="Wrong username or password, please try again !";
 		    }
 		  });
 		result.error(function (data, status){
@@ -133,7 +133,6 @@ poemApp.controller("MainCtrl", function($scope, $http, $location, $q, MainServic
 			data : JSON.stringify(user),			
 		});
 		result.success(function(data,status) {
-		    console.log(data);		    
 		    if(data.result=="Success")
 		    {
 		    	alert('Signup successful '+ $scope.username + ' !\n Login to continue.');

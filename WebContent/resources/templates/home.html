@@ -19,7 +19,7 @@
 						</tr>
 						<tr>
 							<td style="width:20%;vertical-align: top">
-								<span ng-class="{'liked': poem.likes.indexOf(mainService.currentUser.username)!=-1 , 'notliked': poem.likes.indexOf(mainService.currentUser.username)==-1}" uib-tooltip-template="'poemlikelistTemplate.html'" tooltip-popup-close-delay='1000'><i class="fa fa-thumbs-up pointer" ng-click="addlike(poem);"></i></span> {{poem.likes.length}}
+								<span ng-class="{'liked': poem.likes.indexOf(mainService.currentUser.username)!=-1 , 'notliked': poem.likes.indexOf(mainService.currentUser.username)==-1}" uib-tooltip-template="'poemlikelistTemplate.html'" tooltip-popup-close-delay='1000' tooltip-enable="poem.likes.length!=0"><i class="fa fa-thumbs-up pointer" ng-click="addlike(poem);"></i></span> {{poem.likes.length}}
 							</td>
 							<td style="width:60%;vertical-align: top">
 							</td>
@@ -73,11 +73,9 @@
 				<div>
 					<p>
 						<textarea ng-model="commentTextarea" rows="2" cols="50" class="input-no-width rounded shaded left clearboth" id="taid{{poem.date_ts}}" required></textarea> <button type="button" class="btn btn-primary btn-sm" ng-click="addComment(poem);"> Comment </button>
-					</p>								
-					<p>
-						
 					</p>
 				</div>
 			</div>
+			<hr class="poemDivHrTag">	
 		</div>
 	</div>
